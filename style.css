@@ -1,4 +1,104 @@
 body {
-    background: rgb(255, 213, 136);
-    color: rgb(51, 25, 3);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #222;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+#selected-cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.card-slot {
+    aspect-ratio: 2/3;
+    width: min(80px, 20vw); /* уменьшается на маленьких экранах */
+    border: 2px solid #00f;
+    border-radius: 8px;
+    background: rgba(0, 0, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Контейнер для блоков */
+#blocks {
+    display: grid;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Горизонтальный экран — 2 колонки */
+@media (orientation: landscape) {
+    #blocks {
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+/* Вертикальный экран — 1 колонка */
+@media (orientation: portrait) {
+    #blocks {
+        grid-template-columns: 1fr;
+    }
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+/* Карта — адаптивная */
+.card {
+    aspect-ratio: 2/3;
+    width: min(30px, 6vw); /* адаптивный размер */
+    border: 1px solid white;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.2);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.block:nth-child(1) { background: rgba(0,0,255,0.3); }
+.block:nth-child(2) { background: rgba(255,165,0,0.3); }
+.block:nth-child(3) { background: rgba(0,128,0,0.3); }
+.block:nth-child(4) { background: rgba(255,0,0,0.3); }
+.block:nth-child(5) { background: rgba(128,0,128,0.3); }
+.block:nth-child(6) { background: rgba(255,255,0,0.3); }
+
+
+#restart-btn {
+    font-size: 1em;
+    background: rgba(75, 49, 1, 0.3);
+    color: rgba(255, 254, 253, 0.9);
+    border-radius: 2em;
+    box-shadow:
+    3px 3px 0.3em red,
+    -1em 0 0.4em olive;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
 }
