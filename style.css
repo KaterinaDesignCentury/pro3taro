@@ -7,16 +7,20 @@ body {
     padding: 0;
 }
 
+
 #selected-cards {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     margin: 20px 0;
+    flex-wrap: wrap; /* чтобы карты не выходили за экран (изменение для смартфона. чтоб 3 карты былидольшими)*/
 }
+
 
 .card-slot {
     aspect-ratio: 2/3;
-    width: min(80px, 20vw); /* уменьшается на маленьких экранах */
+    flex: 1 1 calc(33% - 10px); /* три карты по ширине с учетом gap */
+    max-width: 200px; /* ограничение для больших экранов */
     border: 2px solid #00f;
     border-radius: 8px;
     background: rgba(0, 0, 255, 0.2);
@@ -47,10 +51,21 @@ body {
     }
 }
 
-/* Вертикальный экран — 1 колонка */
+/* Вертикальный экран — портрет */
 @media (orientation: portrait) {
     #blocks {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* мелкие карты — одна колонка */
+    }
+
+    /* три большие карты растягиваются по ширине экрана */
+    #selected-cards {
+        flex-wrap: wrap; /* чтобы карты не выходили за экран */
+        gap: 10px;
+    }
+
+    .card-slot {
+        flex: 1 1 calc(33% - 10px); /* три карты по ширине */
+        max-width: none; /* снимаем ограничение */
     }
 }
 
@@ -67,7 +82,7 @@ body {
 
 /* Карта — адаптивная */
 .card {
-    aspect-ratio: 2/3;
+    aspect-ratio: 2/3; /* маленькие карты для выбора */
     width: min(30px, 6vw); /* адаптивный размер */
     border: 1px solid white;
     border-radius: 5px;
@@ -101,4 +116,49 @@ body {
     margin-top: 1em;
     padding: 0.5em 1em;
     margin-bottom: 1em;
+}
+
+
+
+
+
+  .card-slot {
+    position: relative;
+  }
+  
+  .card-slot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .tooltip {
+    position: absolute;
+    bottom: 100%; /* над картой */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.2;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none; /* чтобы мышь не блокировала */
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+  
+  .card-slot:hover .tooltip {
+    opacity: 1;
+  }
+
+  .cards-info {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fff; /* белый на тёмном фоне */
 }
